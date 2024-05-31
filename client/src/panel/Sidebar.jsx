@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { List, BarChartFill, PeopleFill, BookFill } from "react-bootstrap-icons";
+import { List,X, BarChartFill, PeopleFill, BookFill } from "react-bootstrap-icons";
 import { AppStates } from "../context/AppStates";
 
 const Sidebar = () => {
@@ -8,74 +8,145 @@ const Sidebar = () => {
     return (
         <div
             className={`${
-                collapse ? "w-[50px] md:w-[5%]" : "w-[200px] md:w-[20%]"
+                collapse ? "w-[50px] md:w-[5%]" : "w-[200px] md:w-[15%]"
             } ease-linear duration-200 bg-blue-500 h-full`}
         >
-            <div className="flex justify-end p-2">
+            <div className={`flex items-center ${collapse ? 'justify-center': 'justify-between'} p-2 text-white`}>
+                <h1 className={`font-[600] text-xl px-2 ${collapse ? 'hidden':'block'}`}>Dashboard</h1>
                 <button onClick={() => setCollapse(!collapse)}>
-                    <List size={30} color="white" />
+                    {
+                        collapse ? (<List size={30} />) : (<X size={30}/>)
+                    }
+                    
+                    
                 </button>
             </div>
-            <div className="py-2">
+            <div className="py-2 mt-2">
                 <ul>
                     <li>
                         <NavLink
-                        activeClassName="active-link"
-                            to="/dashboard/analytics"
-                            className="flex items-center gap-5 p-2 justify-center hover:bg-gray-50 my-2 text-white hover:text-black"
+                            to="/dashboard/"
+                            exact
+                            className={({ isActive }) =>
+                                `flex items-center ${collapse ? '':'gap-3'} p-2 justify-center ${
+                                    isActive ? 'bg-gray-50 text-black' : 'text-white hover:bg-gray-50 hover:text-black'
+                                }`
+                            }
                         >
-                            <BarChartFill className="" />
-                            <p className={`${collapse && "hidden"} `}>Analytics</p>
+                            <div className="   w-[50px] mx-auto flex justify-end">
+                                <BarChartFill className={({ isActive }) => (isActive ? 'text-black' : 'text-white')} />
+                            </div>
+                            <div className="w-[80%]">
+                                <p className={`${collapse && "hidden"}`}>Analytics</p>
+                            </div>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                        activeClassName="active-link"
                             to="/dashboard/allocate_book"
-                            className="flex items-center gap-5 p-2 justify-center hover:bg-gray-50 my-2 text-white hover:text-black"
+                            exact
+                            className={({ isActive }) =>
+                                `flex items-center ${collapse ? '':'gap-3'} p-2 justify-center     ${
+                                    isActive ? 'bg-gray-50 text-black' : 'text-white hover:bg-gray-50 hover:text-black'
+                                }`
+                            }
                         >
-                            <BookFill className="" />
-                            <p className={`${collapse && "hidden"} `}>Allocate Books</p>
+                            <div className="   w-[50px] mx-auto flex justify-end">
+                                <BookFill className={({ isActive }) => (isActive ? 'text-black' : 'text-white')} />
+                            </div>
+                            <div className="w-[80%]">
+                                <p className={`${collapse && "hidden"}`}>Allocate Books</p>
+                            </div>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                        activeClassName="active-link"
                             to="/dashboard/allocated_books"
-                            className="flex items-center gap-5 p-2 justify-center hover:bg-gray-50 my-2 text-white hover:text-black"
+                            exact
+                            className={({ isActive }) =>
+                                `flex items-center ${collapse ? '':'gap-3'} p-2 justify-center     ${
+                                    isActive ? 'bg-gray-50 text-black' : 'text-white hover:bg-gray-50 hover:text-black'
+                                }`
+                            }
                         >
-                            <BookFill className="" />
-                            <p className={`${collapse && "hidden"} `}>Books Allocated</p>
+                            <div className="   w-[50px] mx-auto flex justify-end">
+                                <BookFill className={({ isActive }) => (isActive ? 'text-black' : 'text-white')} />
+                            </div>
+                            <div className="w-[80%]">
+                                <p className={`${collapse && "hidden"}`}>Books Allocated</p>
+                            </div>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                        activeClassName="active-link"
                             to="/dashboard/add_book"
-                            className="flex items-center gap-5 p-2 justify-center hover:bg-gray-50 my-2 text-white hover:text-black"
+                            exact
+                            className={({ isActive }) =>
+                                `flex items-center ${collapse ? '':'gap-3'} p-2 justify-center     ${
+                                    isActive ? 'bg-gray-50 text-black' : 'text-white hover:bg-gray-50 hover:text-black'
+                                }`
+                            }
                         >
-                            <BookFill className="" />
-                            <p className={`${collapse && "hidden"} `}>Add Book</p>
-                        </NavLink>
-                    </li>
-                    <li>
-                        <NavLink 
-                        activeClassName="active-link"
-                            to="/dashboard/all_books"
-                            className="flex items-center gap-5 p-2 justify-center hover:bg-gray-50 my-2 text-white hover:text-black"
-                        >
-                            <BookFill className="" />
-                            <p className={`${collapse && "hidden"} `}>All Books</p>
+                            <div className="   w-[50px] mx-auto flex justify-end">
+                                <BookFill className={({ isActive }) => (isActive ? 'text-black' : 'text-white')} />
+                            </div>
+                            <div className="w-[80%]">
+                                <p className={`${collapse && "hidden"}`}>Add Book</p>
+                            </div>
                         </NavLink>
                     </li>
                     <li>
                         <NavLink
-                        activeClassName="active-link"
-                            to="/dashboard/add_user"
-                            className="flex items-center gap-5 p-2 justify-center hover:bg-gray-50 my-2 text-white hover:text-black"
+                            to="/dashboard/all_books"
+                            exact
+                            className={({ isActive }) =>
+                                `flex items-center ${collapse ? '':'gap-3'} p-2 justify-center     ${
+                                    isActive ? 'bg-gray-50 text-black' : 'text-white hover:bg-gray-50 hover:text-black'
+                                }`
+                            }
                         >
-                            <PeopleFill className="" />
-                            <p className={`${collapse && "hidden"} `}>Add New User</p>
+                            <div className="   w-[50px] mx-auto flex justify-end">
+                                <BookFill className={({ isActive }) => (isActive ? 'text-black' : 'text-white')} />
+                            </div>
+                            <div className="w-[80%]">
+                                <p className={`${collapse && "hidden"}`}>All Books</p>
+                            </div>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to="/dashboard/add_user"
+                            exact
+                            className={({ isActive }) =>
+                                `flex items-center ${collapse ? '':'gap-3'} p-2 justify-center     ${
+                                    isActive ? 'bg-gray-50 text-black' : 'text-white hover:bg-gray-50 hover:text-black'
+                                }`
+                            }
+                        >
+                            <div className="   w-[50px] mx-auto flex justify-end">
+                                <PeopleFill className={({ isActive }) => (isActive ? 'text-black' : 'text-white')} />
+                            </div>
+                            <div className="w-[80%]">
+                                <p className={`${collapse && "hidden"}`}>Add New User</p>
+                            </div>
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink
+                            to="/dashboard/manage_students"
+                            exact
+                            className={({ isActive }) =>
+                                `flex items-center ${collapse ? '':'gap-3'} p-2 justify-center     ${
+                                    isActive ? 'bg-gray-50 text-black' : 'text-white hover:bg-gray-50 hover:text-black'
+                                }`
+                            }
+                        >
+                            <div className="   w-[50px] mx-auto flex justify-end">
+                                <PeopleFill className={({ isActive }) => (isActive ? 'text-black' : 'text-white')} />
+                            </div>
+                            <div className="w-[80%]">
+                                <p className={`${collapse && "hidden"}`}>Manage Students</p>
+                            </div>
                         </NavLink>
                     </li>
                 </ul>

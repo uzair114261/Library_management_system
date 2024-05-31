@@ -18,6 +18,8 @@ import AllBooks from "./components/AllBooks";
 import EditBook from "./components/EditBook";
 import BookAllocation from "./components/BookAllocation";
 import AllocatedBooks from "./components/AllocatedBooks";
+import ManageStudent from "./components/ManageStudent";
+import StudentDetail from "./components/StudentDetail";
 
 const AppContent = () => {
   const location = useLocation();
@@ -29,12 +31,14 @@ const AppContent = () => {
       <div className="content flex-1">
         <Routes>
           <Route path="/dashboard/*" element={<Content />}>
-            <Route path="analytics" element={<Analytics />} />
+            <Route path="" element={<Analytics />} />
             <Route path="add_user" element={<AddUser />} />
             <Route path="add_book" element={<AddBook />} />
             <Route path="all_books" element={<AllBooks />} />
             <Route path="allocate_book" element={<BookAllocation />} />
             <Route path="allocated_books" element={<AllocatedBooks />} />
+            <Route path="manage_students" element={<ManageStudent />} />
+            <Route path="student_info/:cnic" element={<StudentDetail />} />
           </Route>
         </Routes>
       </div>

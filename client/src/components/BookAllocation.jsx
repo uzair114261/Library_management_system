@@ -95,7 +95,7 @@ const BookAllocation = () => {
                     <ol className="list-decimal px-4 py-5">
                         {bookList.map((book) => (
                             <li key={book.id} className="py-2 flex justify-between items-center">
-                                <span>{book.title}</span>
+                                <span>{book.title}  <b>by "{book.author}"</b></span>
                                 <button onClick={() => removeBook(book.id)}>
                                     <X size={25} />
                                 </button>
@@ -125,16 +125,18 @@ const BookAllocation = () => {
                 </div>
             </div>
             {showStudent && (
-                <div className="p-3">
-                    <div className="w-[300px] relative p-5 rounded-lg shadow-lg">
+                <div className="p-3 ">
+                    <div className="bg-white w-[300px] relative p-5 rounded-lg shadow-lg">
                         <div className='absolute top-3 right-3 bg-blue-500 rounded text-[10px] text-white p-1'>{student.standard}</div>
                         <h2 className="text-sm font-bold py-2">Student Details</h2>
                         <div className="text-gray-800 font-[500] text-lg">{student.name}</div>
                         <p className='text-sm text-gray-500'>{student.phone}</p>
+                        <p className='text-sm text-gray-500'>{student.major}</p>
                         <p className='text-sm text-gray-500'>{student.address}</p>
                         <button
+                        disabled={bookList.length === 0}
                             onClick={() => setShowPopUp(true)}
-                            className="bg-blue-500 mt-4 py-1 px-2 text-white rounded text-sm"
+                            className="bg-blue-500 mt-4 py-1 px-2 text-white rounded text-sm disabled:bg-sky-400"
                         >
                             Allocate Book
                         </button>

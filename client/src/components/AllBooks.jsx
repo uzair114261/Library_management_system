@@ -91,17 +91,22 @@ const AllBooks = () => {
     const AddBookToCart = (bookData) => {
         const existingBook = JSON.parse(localStorage.getItem("bookList")) || [];
         const existingBookInLocalState = bookList.find(book => book.id === bookData.id);
-      
+      if(existingBook.length >= 3){
+        notifyError('You cannot allocate more than 3 books to a student.')
+        setShowPopUp(false)
+      }else{
         if (existingBookInLocalState) {
-          notifyError('Book already in the cart');
+            notifyError('Book already in the cart');
+            setShowPopUp(false);
+            return;
+          }
+          const updatedBookList = [...existingBook, bookData];
+          setBookList(updatedBookList);
+          localStorage.setItem("bookList", JSON.stringify(updatedBookList));
+          notifySuccess('Book is ready to Allocate');
           setShowPopUp(false);
-          return;
-        }
-        const updatedBookList = [...existingBook, bookData];
-        setBookList(updatedBookList);
-        localStorage.setItem("bookList", JSON.stringify(updatedBookList));
-        notifySuccess('Book is ready to Allocate');
-        setShowPopUp(false);
+      }
+        
       };
     return (
         <div className='p-5'>
@@ -178,7 +183,7 @@ const AllBooks = () => {
                                     <h3 className="text-gray-500 font-[400]">Total Copies in Library: {bookData.quantity}</h3>
 
                                     <div className="flex gap-3 items-center py-3">
-                                        <button onClick={() => AddBookToCart(bookData)} className='bg-blue-600 rounded text-sm  text-white px-2 py-1 flex items-center gap-2'><ArrowRight /> Allocate</button>
+                                        <button disabled={bookData.quantity <= 0} onClick={() => AddBookToCart(bookData)} className='bg-blue-600 rounded text-sm  text-white px-2 py-1 flex items-center gap-2 disabled:bg-sky-400'><ArrowRight /> Allocate</button>
                                         <button onClick={() => deletePopupHandler(bookData.id)} className='bg-red-600 rounded text-sm  text-white px-2 py-1 flex items-center gap-2'><Trash3Fill /> Delete</button>
                                     </div>
                                 </div>

@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import { useToast } from '../context/ToastContext'
 import moment from 'moment'
+import { CheckLg } from 'react-bootstrap-icons'
 
 const AllocatedBooks = () => {
     const [students, setStudents] = useState({});
@@ -19,43 +20,16 @@ const AllocatedBooks = () => {
         try {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}loan/get_allocated_books?page=${pagination.page}&page_size=${pagination.pageSize}&search=${search}`);
             const data = await response.json();
-            console.log(data.results)
+            console.log(data)
+            
             setAllLoanedBooks(data.results);
             setTotalCount(data.count);
             setNextPage(data.next);
-
-            // fetch student and book data based on IDs
-            // const studentId = new Set(data.results.map(loan=> loan.student))
-            // const bookId = new Set(data.results.map(loan => loan.book))
-            // await fetchStudentData(Array.from(studentId))
-            // await fetchBookData(Array.from(bookId))
             
         } catch (error) {
             console.log(error);
         }
     };
-    // const fetchStudentData = async (studentIds) => {
-    //     try {
-    //         const queryParams = new URLSearchParams({student_ids: studentIds})
-    //         console.log(studentIds)
-    //         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}users/get_student_list?${queryParams}`);
-    //         const data = await response.json();
-    //         console.log(data)
-    //         setStudents(data);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
-
-    // const fetchBookData = async (bookIds) => {
-    //     try {
-    //         const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}books?id=${bookIds.join(',')}`);
-    //         const data = await response.json();
-    //         setBooks(data);
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // };
     useEffect(() => {
         fetchLoanedBooks();
     }, [pagination, search]);
@@ -81,6 +55,24 @@ const AllocatedBooks = () => {
             page: 1
         });
     };
+
+    const handleReturnBook = async (loanBookID) => {
+        try{
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}loan/return_book/${loanBookID}`,{
+                method: 'POST'
+            })
+            const data = await response.json()
+            if(response.ok){
+                notifySuccess('Book has been returned successfully')
+                fetchLoanedBooks()
+            }else{
+                notifyError('An error occured')
+            }
+        }catch(error){
+            notifyError('An error has occured')
+        }
+    }
+
   return (
     <div className='p-5'>
         <div className={`p-5 min-w-[300px] bg-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-lg`}>
@@ -118,7 +110,9 @@ const AllocatedBooks = () => {
                                 <td className='py-1 border px-1 text-sm'>{book.return_date && moment(book.return_date).format('ddd, DD-MMM-YYYY')}</td>
                                 <td className='py-1 border px-1 text-sm'>{book.fine}</td>
                                 <td className='py-1 border px-1 text-sm'>
-                                    <button  className='bg-blue-500 px-2 py-1 text-sm rounded text-white'>Received</button>
+                                    <button disabled={book.status === 'RETURNED'} onClick={()=>handleReturnBook(book.id)} className={`${book.status === "BORROWED"? 'bg-blue-500': 'bg-green-500'} px-2 py-1 w-full flex items-center justify-center mx-auto text-sm rounded text-white`}>
+                                        {book.status === 'BORROWED' ? 'Received': <CheckLg />}
+                                    </button>
                                 </td>
                             </tr>
                         ))}
@@ -131,9 +125,9 @@ const AllocatedBooks = () => {
                     <div className='flex items-center gap-2'>
                         <span>Show:</span>
                         <select name='pageSize' value={pagination.pageSize} onChange={handlePageSizeChange} className='w-[50px] border outline-blue-500'>
-                            <option value='1'>10</option>
-                            <option value='2'>20</option>
-                            <option value='4'>40</option>
+                            <option value='10'>10</option>
+                            <option value='20'>20</option>
+                            <option value='40'>40</option>
                         </select>
                     </div>
                     <div className='flex items-center gap-2'>

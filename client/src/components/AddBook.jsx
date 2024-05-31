@@ -73,7 +73,7 @@ const AddBook = () => {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 py-2">
                         <div className="block">
-                            <label htmlFor="quantity">Quantity</label>
+                            <label htmlFor="quantity">Copies</label>
                             <input {...register('quantity')} type="text" name="quantity" id="quantity" className='input-field' />
                             {errors.quantity && <span className='text-red-600'>{errors.quantity.message}</span>}
                         </div>

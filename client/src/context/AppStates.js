@@ -3,7 +3,7 @@ import { createContext, useState } from "react";
 export const AppStates = createContext()
 
 export const AppStatesProvider = ({ children }) => {
-    const [collapse, setCollapse] = useState(false);
+    const [collapse, setCollapse] = useState(true);
     const contextValues = {
         collapse, setCollapse
     }

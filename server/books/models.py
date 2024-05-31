@@ -17,6 +17,14 @@ class Books(models.Model):
     
     class Meta:
         unique_together = ('title', 'author')
+        
+    def save(self, *args, **kwargs):
+        if self.quantity <= 0:
+            self.status = 'LOANED'
+        elif self.quantity > 0:
+            self.status = 'AVAILABLE'
+        super(Books, self).save(*args, **kwargs)
+        
     def __str__(self):
         return self.title
     

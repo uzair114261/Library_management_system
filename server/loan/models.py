@@ -16,3 +16,14 @@ class LoanBook(models.Model):
     return_date = models.DateTimeField(null=True, blank=True)
     fine = models.IntegerField(max_length=5, default=0)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='BORROWED')
+    
+    def calculate_fine(self):
+        if self.return_date and self.return_date > self.due_date:
+            overdue_days = (self.return_date - self.due_date).days
+            self.fine = overdue_days * 100
+            self.status = 'OVERDUE'
+        elif self.return_date and self.return_date <= self.due_date:
+            self.fine = 0
+            self.status = 'RETURNED'
+        self.save()
+    

@@ -17,7 +17,7 @@ def create_book(request):
 
 
 class CustomPagination(PageNumberPagination):
-    page_size = 1  # Number of rows per page
+    page_size = 10  # Number of rows per page
     page_size_query_param = 'page_size'
     max_page_size = 100
 

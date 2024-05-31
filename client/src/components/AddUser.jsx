@@ -5,8 +5,10 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useToast } from '../context/ToastContext'
 import { AppStates } from '../context/AppStates'
+import {useNavigate} from 'react-router-dom'
 
 const AddUser = () => {
+    const navigate = useNavigate()
     const {collapse} = useContext(AppStates)
     const { notifyError, notifySuccess } = useToast()
     const [loading, setLoading] = useState(false)
@@ -52,6 +54,7 @@ const AddUser = () => {
             const responseData = await response.json();
             if (response.ok) {
                 notifySuccess('New User has been added successfully')
+                navigate('/dashboard/')
             } else {
                 const firstPropertyArray = Object.values(responseData)[0][0];
                 notifyError(firstPropertyArray);
@@ -132,8 +135,9 @@ const AddUser = () => {
                                     <label htmlFor="major">Majors</label>
                                     <select {...register('major')} className='input-field' name="major" id="major">
                                         <option value="">--Select--</option>
-                                        <option value="11th">FSC Pre-Engineering</option>
-                                        <option value="11th">FSC Pre-Medical</option>
+                                        <option value="FSC Pre-Engineering">FSC Pre-Engineering</option>
+                                        <option value="FSC Pre-Medical">FSC Pre-Medical</option>
+                                        <option value="ICS">ICS</option>
                                         <option value="BS Computer Science">BS Computer Science</option>
                                         <option value="BS Software Engineering">BS Software Engineering</option>
                                         <option value="BS Information Technology">BS Information Technology</option>
