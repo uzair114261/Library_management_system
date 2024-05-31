@@ -59,7 +59,7 @@ const BookAllocation = () => {
         const payload = {
             student_cnic: searchVal,
             book_ids: bookIds,
-            due_date: returnDate 
+            due_date: returnDate
         };
 
         try {
@@ -80,12 +80,17 @@ const BookAllocation = () => {
                 navigate('/dashboard/allocated_books')
             } else {
                 notifyError(data.error);
+                setBookList([])
+                localStorage.removeItem('bookList')
+                setShowPopUp(false)
+                navigate('/dashboard/all_books')
             }
         } catch (error) {
             console.log(error);
             notifyError("Failed to allocate books");
         }
     };
+
 
     return (
         <div className="p-5">
@@ -134,7 +139,7 @@ const BookAllocation = () => {
                         <p className='text-sm text-gray-500'>{student.major}</p>
                         <p className='text-sm text-gray-500'>{student.address}</p>
                         <button
-                        disabled={bookList.length === 0}
+                            disabled={bookList.length === 0}
                             onClick={() => setShowPopUp(true)}
                             className="bg-blue-500 mt-4 py-1 px-2 text-white rounded text-sm disabled:bg-sky-400"
                         >

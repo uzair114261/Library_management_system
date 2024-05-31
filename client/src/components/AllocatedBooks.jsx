@@ -4,11 +4,8 @@ import moment from 'moment'
 import { CheckLg } from 'react-bootstrap-icons'
 
 const AllocatedBooks = () => {
-    const [students, setStudents] = useState({});
-    const [books, setBooks] = useState({});
     const { notifySuccess, notifyError } = useToast()
     const [search, setSearch] = useState('')
-    const [showPopup, setShowPopUp] = useState(false)
     const [pagination, setPagination] = useState({
         page: 1,
         pageSize: 10,
@@ -73,6 +70,10 @@ const AllocatedBooks = () => {
         }
     }
 
+    const calculateFine = (dueDate, returnDate) => {
+        
+    }
+
   return (
     <div className='p-5'>
         <div className={`p-5 min-w-[300px] bg-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-lg`}>
@@ -99,7 +100,7 @@ const AllocatedBooks = () => {
                     </thead>
                     <tbody>
                         {LoanedBooks.map((book, index) => (
-                            <tr className='hover:bg-gray-50 ease-linear duration-200 px-1' key={book.id}>
+                            <tr className='hover:bg-gray-50 ease-linear duration-200 px-1' key={book?.id}>
                                 <td className='py-1 border px-1 text-sm'>{book.id}</td>
                                 <td className='py-1 border px-1 text-sm'>{book.student_data.name}</td>
                                 <td className='py-1 border px-1 text-sm'>{book.student_data.cnic}</td>

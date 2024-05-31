@@ -2,9 +2,12 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { List,X, BarChartFill, PeopleFill, BookFill } from "react-bootstrap-icons";
 import { AppStates } from "../context/AppStates";
+import { BookContext } from "../context/BookCart";
 
 const Sidebar = () => {
     const { collapse, setCollapse } = useContext(AppStates);
+    const {bookList} = useContext(BookContext)
+    console.log(bookList);
     return (
         <div
             className={`${
@@ -51,8 +54,11 @@ const Sidebar = () => {
                                 }`
                             }
                         >
-                            <div className="   w-[50px] mx-auto flex justify-end">
+                            <div className="   w-[50px] mx-auto flex justify-end relative">
                                 <BookFill className={({ isActive }) => (isActive ? 'text-black' : 'text-white')} />
+                                {bookList.length > 0 && (
+                                    <span className="bg-red-500 rounded-full px-1 absolute top-[-8px] right-[-10px] text-[10px] text-white">{bookList.length}</span>
+                                )}
                             </div>
                             <div className="w-[80%]">
                                 <p className={`${collapse && "hidden"}`}>Allocate Books</p>
