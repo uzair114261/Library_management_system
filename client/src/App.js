@@ -15,11 +15,17 @@ import AddUser from "./components/AddUser";
 import Analytics from "./components/Analytics";
 import AddBook from "./components/AddBook";
 import AllBooks from "./components/AllBooks";
-import EditBook from "./components/EditBook";
 import BookAllocation from "./components/BookAllocation";
 import AllocatedBooks from "./components/AllocatedBooks";
 import ManageStudent from "./components/ManageStudent";
 import StudentDetail from "./components/StudentDetail";
+import Login from "./authentication/Login";
+import Home from "./components/Home";
+import StudentLogin from "./authentication/StudentLogin";
+import StudentPanel from "./components/Student/StudentPanel";
+import UpdateProfile from "./components/Student/UpdateProfile";
+import AvailalbeBooks from "./components/Student/AvailalbeBooks";
+import LoanBooks from "./components/Student/LoanBooks";
 
 const AppContent = () => {
   const location = useLocation();
@@ -30,6 +36,18 @@ const AppContent = () => {
       {showSidebar && <Sidebar />}
       <div className="content flex-1">
         <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/student_login" element={<StudentLogin />} />
+          <Route path="/student_panel/*" element={<StudentPanel />}>
+            <Route path="" element={<LoanBooks />} />
+            <Route path="update_profile" element={<UpdateProfile />} />
+            <Route path="books_available" element={<AvailalbeBooks />} />
+
+          </Route>
+        </Routes>
+        <Routes>
+
+          <Route path="/admin_login" element={<Login />} />
           <Route path="/dashboard/*" element={<Content />}>
             <Route path="" element={<Analytics />} />
             <Route path="add_user" element={<AddUser />} />

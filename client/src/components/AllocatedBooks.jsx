@@ -3,6 +3,7 @@ import { useToast } from '../context/ToastContext'
 import moment from 'moment'
 import { CheckLg } from 'react-bootstrap-icons'
 
+
 const AllocatedBooks = () => {
     const { notifySuccess, notifyError } = useToast()
     const [search, setSearch] = useState('')
@@ -58,7 +59,6 @@ const AllocatedBooks = () => {
             const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}loan/return_book/${loanBookID}`,{
                 method: 'POST'
             })
-            const data = await response.json()
             if(response.ok){
                 notifySuccess('Book has been returned successfully')
                 fetchLoanedBooks()
@@ -71,7 +71,12 @@ const AllocatedBooks = () => {
     }
 
     const calculateFine = (dueDate, returnDate) => {
-        
+        const dueDateTime = new Date(dueDate)
+        const returnDateTime = new Date(returnDate)
+        const timeDifference = returnDateTime - dueDateTime
+        const daydifference = Math.ceil(timeDifference/ (1000 * 60 * 60 * 24))
+        const finalAmount = daydifference > 0 ? daydifference * 100 : 0
+        return finalAmount;
     }
 
   return (
@@ -99,24 +104,29 @@ const AllocatedBooks = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {LoanedBooks.map((book, index) => (
-                            <tr className='hover:bg-gray-50 ease-linear duration-200 px-1' key={book?.id}>
-                                <td className='py-1 border px-1 text-sm'>{book.id}</td>
-                                <td className='py-1 border px-1 text-sm'>{book.student_data.name}</td>
-                                <td className='py-1 border px-1 text-sm'>{book.student_data.cnic}</td>
-                                <td className='py-1 border px-1 text-sm'>{book.book_data.title}</td>
-                                <td className='py-1 border px-1 text-sm'>{`${book.status.charAt(0).toUpperCase()}${book.status.slice(1).toLowerCase()}`}</td>
-                                <td className='py-1 border px-1 text-sm'>{moment(book.loan_date).format('ddd, DD-MMM-YYYY')}</td>
-                                <td className='py-1 border px-1 text-sm'>{moment(book.due_date).format('ddd, DD-MMM-YYYY')}</td>
-                                <td className='py-1 border px-1 text-sm'>{book.return_date && moment(book.return_date).format('ddd, DD-MMM-YYYY')}</td>
-                                <td className='py-1 border px-1 text-sm'>{book.fine}</td>
-                                <td className='py-1 border px-1 text-sm'>
-                                    <button disabled={book.status === 'RETURNED'} onClick={()=>handleReturnBook(book.id)} className={`${book.status === "BORROWED"? 'bg-blue-500': 'bg-green-500'} px-2 py-1 w-full flex items-center justify-center mx-auto text-sm rounded text-white`}>
-                                        {book.status === 'BORROWED' ? 'Received': <CheckLg />}
-                                    </button>
-                                </td>
-                            </tr>
-                        ))}
+                    {LoanedBooks.map((book, index) => (
+    <tr className='hover:bg-gray-50 ease-linear duration-200 px-1' key={book?.id}>
+        <td className='py-1 border px-1 text-sm'>{book.id}</td>
+        <td className='py-1 border px-1 text-sm'>{book.student_data.name}</td>
+        <td className='py-1 border px-1 text-sm'>{book.student_data.cnic}</td>
+        <td className='py-1 border px-1 text-sm'>{book.book_data.title}</td>
+        <td className='py-1 border px-1 text-sm'>{`${book.status.charAt(0).toUpperCase()}${book.status.slice(1).toLowerCase()}`}</td>
+        <td className='py-1 border px-1 text-sm'>{moment(book.loan_date).format('ddd, DD-MMM-YYYY')}</td>
+        <td className='py-1 border px-1 text-sm'>{moment(book.due_date).format('ddd, DD-MMM-YYYY')}</td>
+        <td className='py-1 border px-1 text-sm'>{book.return_date && moment(book.return_date).format('ddd, DD-MMM-YYYY')}</td>
+        <td className='py-1 border px-1 text-sm'>
+            {calculateFine(
+                moment(book.due_date).format('YYYY-MM-DD'),
+                book.return_date ? moment(book.return_date).format('YYYY-MM-DD') : null
+            )}
+        </td>
+        <td className='py-1 border px-1 text-sm'>
+            <button disabled={book.status === 'RETURNED'} onClick={() => handleReturnBook(book.id)} className={`${book.status === "BORROWED" ? 'bg-blue-500' : 'bg-green-500'} px-2 py-1 w-full flex items-center justify-center mx-auto text-sm rounded text-white`}>
+                {book.status === 'BORROWED' ? 'Received' : <CheckLg />}
+            </button>
+        </td>
+    </tr>
+))}
                     </tbody>
                 </table>
                 <div className='flex items-center justify-between pt-3 gap-2'>

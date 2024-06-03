@@ -8,7 +8,6 @@ from django.utils import timezone
 from books.models import Books
 from users.models import User
 from rest_framework.pagination import PageNumberPagination
-from datetime import timedelta
 
 class CustomPagination(PageNumberPagination):
     page_size = 10  # Number of rows per page
@@ -82,7 +81,7 @@ def return_book(request, loan_id):
     except LoanBook.DoesNotExist:
         return Response({'error': 'Loan record not found.'}, status=status.HTTP_404_NOT_FOUND)
     
-    loan_book.return_date = timezone.now() + timedelta(days=20)
+    loan_book.return_date = timezone.now()
     loan_book.calculate_fine()
     loan_book.save()
 
@@ -95,3 +94,25 @@ def return_book(request, loan_id):
 
     serializer = LoanBookSerializer(loan_book)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_loans_by_student_cnic(request, student_cnic):
+    try:
+        student = User.objects.get(cnic=student_cnic, role='STUDENT')
+    except User.DoesNotExist:
+        return Response({'error': 'Student not found.'}, status=status.HTTP_404_NOT_FOUND)
+
+    paginator = CustomPagination()
+    loans = LoanBook.objects.filter(student=student)
+    
+    # Optionally, you can add search and filtering logic here
+    search_query = request.query_params.get('search', None)
+    if search_query:
+        loans = loans.filter(
+            Q(book__title__icontains=search_query)
+        )
+
+    result_page = paginator.paginate_queryset(loans, request)
+    serializer = LoanBookSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
