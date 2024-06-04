@@ -56,7 +56,7 @@ const AddBook = () => {
 
     return (
         <div className='p-5'>
-            <div className={`p-5 min-w[300px] bg-white ${collapse ? 'max-w-[600px]': 'max-w-[500px]'} ease-linear duration-200 mx-auto rounded-lg shadow-`}>
+            <div className={`p-5 min-w[300px] bg-white dark:bg-slate-700 dark:text-white ${collapse ? 'max-w-[600px]': 'max-w-[500px]'} ease-linear duration-200 mx-auto rounded-lg shadow-`}>
                 <h2 className="text-lg font-bold text-center">Add Book</h2>
                 <form action="" onSubmit={handleSubmit(AddBookHandler)} enctype="multipart/form-data" >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 py-2">
@@ -126,7 +126,7 @@ const AddBook = () => {
                             {errors.image && <span className='text-red-600'>{errors.image.message}</span>}
                         </div>
                     </div>
-                    <button type='submit' className='btn flex justify-center'> {loading ? <span class="loader"></span> : 'Add Book'}</button>
+                    <button type='submit' className='btn flex justify-center dark:bg-white dark:text-gray-900'> {loading ? <span class="loader"></span> : 'Add Book'}</button>
 
                 </form>
             </div>

@@ -51,16 +51,19 @@ function StudentHeader() {
             <div className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
               {isOpen ? <X size={22} color="#FFF" /> : <List size={22} color="#FFF" />}
             </div>
-            <DarkModeToggle />
+
             <div className="relative" ref={dropdownRef}>
-              <div className="h-[40px] w-[40px] cursor-pointer" onClick={()=>setDropdown(!dropdown)}>
+              <div className="h-[40px] w-[40px] cursor-pointer" onClick={() => setDropdown(!dropdown)}>
                 <img className="h-full w-full rounded-full" src={`${process.env.REACT_APP_BACKEND_URL}${image}`} alt="" />
               </div>
               {dropdown && (
                 <div className="dropdown z-50 absolute right-[-1px] md:left-[-140px] mt-2 rounded-lg dark:bg-slate-700 border border-gray-200 w-[200px] bg-white py-2 px-1">
                   <ul className="mt-2">
                     <li className="hover:bg-gray-200 py-1 px-2 ease-linear duration-200 rounded hover:text-gray-800">
-                      <button onClick={()=>navigate('/student_panel/update_profile')} className="w-full text-left dark:text-white dark:hover:text-gray-900">Update Profile</button>
+                      <button onClick={() => navigate('/student_panel/update_profile')} className="w-full text-left dark:text-white dark:hover:text-gray-900">Update Profile</button>
+                    </li>
+                    <li className="hover:bg-gray-200 py-1 px-2 ease-linear duration-200 rounded hover:text-gray-800">
+                      <DarkModeToggle /> 
                     </li>
                     <li className="hover:bg-gray-200 py-1 px-2 ease-linear duration-200 rounded hover:text-gray-800">
                       <button onClick={logoutHandler} className="w-full text-left dark:text-white dark:hover:text-gray-900">Logout</button>

@@ -1,34 +1,32 @@
-import React, { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import { List,X, BarChartFill, PeopleFill, BookFill } from "react-bootstrap-icons";
 import { AppStates } from "../context/AppStates";
 import { BookContext } from "../context/BookCart";
 
 const Sidebar = () => {
+    const location = useLocation()
     const { collapse, setCollapse } = useContext(AppStates);
+    useEffect(()=>{
+        if(window.matchMedia('(max-width: 768px').matches){
+            setCollapse(true)
+        }
+    },[location])
     const {bookList} = useContext(BookContext)
-    console.log(bookList);
     return (
         <div
-            className={`${
-                collapse ? "w-[50px] md:w-[5%]" : "w-[200px] md:w-[15%]"
-            } ease-linear duration-200 bg-blue-500 h-full`}
-        >
-            <div className={`flex items-center ${collapse ? 'justify-center': 'justify-between'} p-2 text-white`}>
-                <h1 className={`font-[600] text-xl px-2 ${collapse ? 'hidden':'block'}`}>Dashboard</h1>
-                <button onClick={() => setCollapse(!collapse)}>
-                    {
-                        collapse ? (<List size={30} />) : (<X size={30}/>)
-                    }
-                    
-                    
-                </button>
-            </div>
-            <div className="py-2 mt-2">
+        className={`fixed md:relative ${
+            collapse ? "w-[50px] md:w-[5%]" : "w-[200px] md:w-[15%]"
+        } ease-linear duration-200 bg-blue-500 dark:bg-slate-800 h-full z-10`}
+    >
+        <div className={`flex items-center my-3 ${collapse ? 'justify-center' : 'justify-between'} p-2 text-white`}>
+            <h1 className={`font-[600] text-xl px-2 ${collapse ? 'hidden' : 'block'}`}>Dashboard</h1>
+        </div>
+            <div className="py-2 mt-10">
                 <ul>
                     <li>
                         <NavLink
-                            to="/dashboard/"
+                            to="/dashboard/analytics"
                             exact
                             className={({ isActive }) =>
                                 `flex items-center ${collapse ? '':'gap-3'} p-2 justify-center ${

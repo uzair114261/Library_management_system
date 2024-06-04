@@ -14,7 +14,7 @@ body{
 }
 
 .input-field{
-  @apply w-full p-2 outline-blue-500 border-[1px] border-gray-300 rounded text-gray-800 dark:bg-slate-600 dark:text-white
+  @apply w-full p-2 outline-blue-500 dark:outline-none border-[1px] border-gray-300 rounded text-gray-800 dark:bg-slate-600 dark:text-white
 }
 .file-selection{
   @apply w-full my-2 bg-gray-200 rounded dark:bg-slate-600 text-sm file:text-sm file:rounded-tl file:rounded-bl file:border-none dark:file:bg-white dark:file:text-gray-900 file:bg-blue-500 file:p-2 file:text-white

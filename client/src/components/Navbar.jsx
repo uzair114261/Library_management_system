@@ -1,11 +1,13 @@
 // Navbar.jsx
-import React, { useState, useEffect, useRef } from 'react';
-import { BookHalf, X } from 'react-bootstrap-icons';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import { BookHalf, X, List } from 'react-bootstrap-icons';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../context/ToastContext';
 import DarkModeToggle from '../context/DarkModeToggle';
+import { AppStates } from '../context/AppStates';
 
 const Navbar = () => {
+    const {collapse, setCollapse} = useContext(AppStates)
     const { notifySuccess } = useToast();
     const [logoutConfirm, setLogoutConfirm] = useState(false);
     const [dropdown, setDropdown] = useState(false);
@@ -42,11 +44,16 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className=''>
+        <div className='shadow dark:border-l-[1px]'>
             <div className='py-2 px-7 flex items-center justify-between bg-white dark:bg-slate-800'>
                 <div className="flex items-center gap-2 dark:text-white">
-                    <h2 className="text-xl font-[600] ">Library Management System</h2>
-                    <BookHalf />
+                <button onClick={() => setCollapse(!collapse)}>
+                    {
+                        collapse ? (<List size={30} />) : (<X size={30}/>)
+                    }
+                    
+                    
+                </button>
                 </div>
                 <div className="relative" ref={dropdownRef}>
                     <div className="h-[40px] w-[40px] cursor-pointer" onClick={() => setDropdown(!dropdown)}>

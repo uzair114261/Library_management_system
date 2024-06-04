@@ -110,11 +110,11 @@ const AllBooks = () => {
       };
     return (
         <div className='p-5'>
-            <div className={`p-5 min-w-[300px] bg-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-`}>
+            <div className={`p-5 min-w-[300px] bg-white dark:bg-slate-700 dark:text-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-`}>
                 <div className="flex items-center justify-end pb-4">
                     <div className="flex border rounded text-sm">
-                        <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder='Type Searching' className=' outline-none p-2 h-full  text-gray-800' />
-                        <button className='bg-blue-500 px-2 text-white rounded-tr rounded-br'>Search</button>
+                        <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder='Type Searching' className=' outline-none dark:text-white dark:bg-slate-800 dark:outline-none p-2 h-full  text-gray-800' />
+                        <button className='bg-blue-500 px-2 text-white dark:text-gray-900 dark:bg-white rounded-tr rounded-br'>Search</button>
                     </div>
                 </div>
                 <table className='w-full'>
@@ -130,14 +130,14 @@ const AllBooks = () => {
                     </thead>
                     <tbody>
                         {books.map((book, index) => (
-                            <tr className='hover:bg-gray-50 ease-linear duration-200 px-2' key={book.id}>
+                            <tr className='hover:bg-gray-50 dark:hover:bg-slate-800 ease-linear duration-200 px-2' key={book.id}>
                                 <td className='py-1 border px-3'>{book.id}</td>
                                 <td className='py-1 border px-3'>{book.title}</td>
                                 <td className='py-1 border px-3'>{book.author}</td>
                                 <td className='py-1 border px-3'>{book.category}</td>
                                 <td className='py-1 border px-3'>{`${book.status.charAt(0).toUpperCase()}${book.status.slice(1).toLowerCase()}`}</td>
                                 <td className='py-1 border px-3'>
-                                    <button onClick={() => detailHandler(book)} className='bg-blue-500 px-2 py-1 text-sm rounded text-white'>Details</button>
+                                    <button onClick={() => detailHandler(book)} className='bg-blue-500 dark:bg-white dark:text-gray-900 px-2 py-1 text-sm rounded text-white'>Details</button>
                                 </td>
                             </tr>
                         ))}
@@ -149,7 +149,7 @@ const AllBooks = () => {
                     </div>
                     <div className='flex items-center gap-2'>
                         <span>Show:</span>
-                        <select name='pageSize' value={pagination.pageSize} onChange={handlePageSizeChange} className='w-[50px] border outline-blue-500'>
+                        <select name='pageSize' value={pagination.pageSize} onChange={handlePageSizeChange} className='w-[50px] border dark:bg-slate-800 outline-blue-500'>
                             <option value='10'>10</option>
                             <option value='20'>20</option>
                             <option value='40'>40</option>
@@ -165,7 +165,7 @@ const AllBooks = () => {
             {
                 showPopup && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 ease-linear duration-200">
-                        <div className="bg-white rounded shadow-lg min-w-[320px] md:w-[800px] max-w-[800px] ease-linear duration-200">
+                        <div className="bg-white dark:bg-slate-800 dark:text-white rounded shadow-lg min-w-[320px] md:w-[800px] max-w-[800px] ease-linear duration-200">
                             <div className="flex items-center justify-end">
                                 <button onClick={() => setShowPopUp(false)} className="bg-none p-2"><X size={30} /> </button>
                             </div>
@@ -175,12 +175,12 @@ const AllBooks = () => {
                                 </div>
                                 <div className='w-[800px]'>
                                     <h2 className="text-lg font-[600]">{bookData.title}</h2>
-                                    <h3 className="text-gray-500 font-[400]">Written by {bookData.author}</h3>
-                                    <div className='bg-gray-50 p-2 my-2 max-h-[300px] overflow-y-scroll rounded w-full'>
+                                    <h3 className="text-gray-500 font-[400] dark:text-white">Written by <b>{bookData.author}</b></h3>
+                                    <div className='bg-gray-50 dark:bg-slate-900 p-2 my-2 max-h-[300px] overflow-y-scroll rounded w-full'>
                                         <h2 className="font-[500]">Description:</h2>
-                                        <p className='text-gray-500 text-justify text-sm'>{bookData.description}</p>
+                                        <p className='text-gray-500 dark:text-white  text-justify text-sm'>{bookData.description}</p>
                                     </div>
-                                    <h3 className="text-gray-500 font-[400]">Total Copies in Library: {bookData.quantity}</h3>
+                                    <h3 className="text-gray-500 font-[400] dark:text-white">Total Copies in Library: {bookData.quantity}</h3>
 
                                     <div className="flex gap-3 items-center py-3">
                                         <button disabled={bookData.quantity <= 0} onClick={() => AddBookToCart(bookData)} className='bg-blue-600 rounded text-sm  text-white px-2 py-1 flex items-center gap-2 disabled:bg-sky-400'><ArrowRight /> Allocate</button>

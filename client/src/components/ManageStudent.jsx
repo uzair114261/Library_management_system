@@ -70,11 +70,11 @@ const ManageStudent = () => {
     }
         return (
             <div className='p-5'>
-                <div className={`p-5 min-w-[300px] bg-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-lg`}>
+                <div className={`p-5 min-w-[300px] bg-white dark:bg-slate-700 dark:text-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-lg`}>
                     <div className="flex items-center justify-end pb-4">
                         <div className="flex border rounded text-sm">
-                            <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder='search by Name' className=' outline-none p-2 h-full  text-gray-800' />
-                            <button className='bg-blue-500 px-2 text-white rounded-tr rounded-br'>Search</button>
+                            <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder='search by Name' className=' outline-none dark:outline-none dark:bg-slate-800 dark:text-white p-2 h-full  text-gray-800' />
+                            <button className='bg-blue-500 px-2 dark:bg-white dark:text-gray-900 text-white rounded-tr rounded-br'>Search</button>
                         </div>
                     </div>
                     <table className='w-full'>
@@ -93,7 +93,7 @@ const ManageStudent = () => {
                         </thead>
                         <tbody>
                             {allStudents.map((student, index) => (
-                                <tr className='hover:bg-gray-100 ease-linear duration-200 px-1' key={student.id}>
+                                <tr className='hover:bg-gray-100 dark:hover:bg-slate-800 ease-linear duration-200 px-1' key={student.id}>
                                     <td className='py-2 text-center border px-1 text-sm'>{index + 1}</td>
                                     <td className='py-2 border px-1 text-sm'>{student.name}</td>
                                     <td className='py-2 border px-1 text-sm'>{student.cnic}</td>
@@ -102,8 +102,8 @@ const ManageStudent = () => {
                                     <td className='py-2 border px-1 text-sm'>{student.address}</td>
                                     <td className='py-2 border px-1 text-sm'>
                                         <div className="flex gap-2 justify-center mx-auto">
-                                            <button onClick={()=> navigate(`/dashboard/student_info/${student.cnic}`)} className='bg-blue-500 text-sm rounded p-2 text-white'><InfoCircleFill /></button>
-                                            <button onClick={() => showPopup(student.cnic)} className='bg-red-500 text-sm rounded p-2 text-white'><Trash3Fill /></button>
+                                            <button onClick={()=> navigate(`/dashboard/student_info/${student.cnic}`)} className='bg-blue-500 text-sm rounded p-2 dark:bg-white dark:text-gray-900 text-white'><InfoCircleFill /></button>
+                                            <button onClick={() => showPopup(student.cnic)} className='bg-red-500 dark:bg-red-700 text-sm rounded p-2 text-white  '><Trash3Fill /></button>
 
                                         </div>
                                     </td>
@@ -118,7 +118,7 @@ const ManageStudent = () => {
                         </div>
                         <div className='flex items-center gap-2'>
                             <span>Show:</span>
-                            <select name='pageSize' value={pagination.pageSize} onChange={handlePageSizeChange} className='w-[50px] border outline-blue-500'>
+                            <select name='pageSize' value={pagination.pageSize} onChange={handlePageSizeChange} className='w-[50px] border dark:bg-slate-800 outline-blue-500'>
                                 <option value='10'>10</option>
                                 <option value='20'>20</option>
                                 <option value='40'>40</option>
@@ -134,7 +134,7 @@ const ManageStudent = () => {
                 {
                     deletePopup && (
                         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 ease-linear duration-200">
-                        <div className="bg-white rounded shadow-lg min-w-[320px] md:w-[450px] max-w-[500px] ease-linear duration-200 py-2 px-3">
+                        <div className="bg-white dark:bg-slate-800 dark:text-white rounded shadow-lg min-w-[320px] md:w-[450px] max-w-[500px] ease-linear duration-200 py-2 px-3">
                             <div className="p-2">
                                 <div className='flex items-center justify-between border-b pb-2'>
                                     <h2 className="text-xl font-[600]">Confirmation</h2>

@@ -68,7 +68,7 @@ const AddUser = () => {
 
     return (
         <div className='p-5'>
-            <div className={`p-5 min-w[300px] bg-white ${collapse ? 'max-w-[600px]': 'max-w-[500px]'} ease-linear duration-200 mx-auto rounded-lg shadow-`}>
+            <div className={`p-5 min-w[300px] bg-white dark:bg-slate-700 dark:text-white ${collapse ? 'max-w-[600px]': 'max-w-[500px]'} ease-linear duration-200 mx-auto rounded-lg shadow-`}>
                 <h2 className="text-lg font-bold text-center">Add New User</h2>
                 <form action="" onSubmit={handleSubmit(AddUserHandler)}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 py-2">
@@ -161,7 +161,7 @@ const AddUser = () => {
                             <input {...register('profile')} name="profile" id="profile" type='file' accept='image/*' multiple={false} className='file-selection'></input>
                         </div>
                     </div>
-                    <button type='submit' className='btn flex justify-center'> {loading ? <span class="loader"></span> : 'Register'}</button>
+                    <button type='submit' className='btn flex justify-center dark:bg-white dark:text-gray-900'> {loading ? <span class="loader"></span> : 'Register'}</button>
                 </form>
             </div>
         </div>

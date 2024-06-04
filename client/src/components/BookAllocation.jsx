@@ -94,27 +94,27 @@ const BookAllocation = () => {
 
     return (
         <div className="p-5">
-            <h2 className="text-xl font-bold">Book to be Allocated to Student</h2>
-            <div className="mt-4 p-5 min-w[300px] bg-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-">
+            <h2 className="text-xl font-bold dark:text-white">Book to be Allocated to Student</h2>
+            <div className="mt-4 p-5 min-w[300px] bg-white dark:bg-slate-700 dark:text-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-">
                 {bookList.length > 0 ? (
                     <ol className="list-decimal px-4 py-5">
                         {bookList.map((book) => (
                             <li key={book.id} className="py-2 flex justify-between items-center">
                                 <span>{book.title}  <b>by "{book.author}"</b></span>
                                 <button onClick={() => removeBook(book.id)}>
-                                    <X size={25} />
+                                    <X size={25} className='dark:text-white' />
                                 </button>
                             </li>
                         ))}
                     </ol>
                 ) : (
                     <div className="">
-                        <h3 className="font-[500]">No Book to be Allocated</h3>
+                        <h3 className="font-[500] dark:text-white">No Book to be Allocated</h3>
                     </div>
                 )}
             </div>
             <div className="p-3">
-                <h2 className="text-xl font-bold">Search for Student</h2>
+                <h2 className="text-xl font-bold dark:text-white">Search for Student</h2>
                 <div className="flex truncate rounded text-sm my-2">
                     <ReactInputMask
                         mask={`99999-9999999-9`}
@@ -122,26 +122,26 @@ const BookAllocation = () => {
                         onChange={(e) => setSeachVal(e.target.value)}
                         type="text"
                         placeholder="Search by CNIC"
-                        className=" outline-blue-500 p-2 h-full text-gray-800"
+                        className=" outline-blue-500 dark:outline-none dark:text-white dark:bg-slate-700 p-2 h-full text-gray-800"
                     />
-                    <button onClick={handleSearch} className="bg-blue-500 px-2 text-white rounded-tr rounded-br">
+                    <button onClick={handleSearch} className="bg-blue-500 dark:bg-white dark:text-gray-900 px-2 text-white rounded-tr rounded-br">
                         Search
                     </button>
                 </div>
             </div>
             {showStudent && (
                 <div className="p-3 ">
-                    <div className="bg-white w-[300px] relative p-5 rounded-lg shadow-lg">
-                        <div className='absolute top-3 right-3 bg-blue-500 rounded text-[10px] text-white p-1'>{student.standard}</div>
-                        <h2 className="text-sm font-bold py-2">Student Details</h2>
-                        <div className="text-gray-800 font-[500] text-lg">{student.name}</div>
-                        <p className='text-sm text-gray-500'>{student.phone}</p>
-                        <p className='text-sm text-gray-500'>{student.major}</p>
-                        <p className='text-sm text-gray-500'>{student.address}</p>
+                    <div className="bg-white dark:bg-slate-700  w-[300px] relative p-5 rounded-lg shadow-lg">
+                        <div className='absolute top-3 right-3 bg-blue-500 rounded dark:bg-white dark:text-gray-900 text-[10px] text-white p-1'>{student.standard}</div>
+                        <h2 className="text-sm font-bold py-2 dark:text-white">Student Details</h2>
+                        <div className="text-gray-800 font-[500] text-lg dark:text-white">{student.name}</div>
+                        <p className='text-sm text-gray-500 dark:text-white'>{student.phone}</p>
+                        <p className='text-sm text-gray-500 dark:text-white'>{student.major}</p>
+                        <p className='text-sm text-gray-500 dark:text-white'>{student.address}</p>
                         <button
                             disabled={bookList.length === 0}
                             onClick={() => setShowPopUp(true)}
-                            className="bg-blue-500 mt-4 py-1 px-2 text-white rounded text-sm disabled:bg-sky-400"
+                            className="bg-blue-500 dark:bg-white dark:text-gray-900 mt-4 py-1 px-2 text-white rounded text-sm disabled:bg-sky-400 dark:disabled:text-gray-400"
                         >
                             Allocate Book
                         </button>

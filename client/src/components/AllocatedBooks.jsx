@@ -81,11 +81,11 @@ const AllocatedBooks = () => {
 
   return (
     <div className='p-5'>
-        <div className={`p-5 min-w-[300px] bg-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-lg`}>
+        <div className={`p-5 min-w-[300px] bg-white dark:bg-slate-700 dark:text-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-lg`}>
                 <div className="flex items-center justify-end pb-4">
                     <div className="flex border rounded text-sm">
-                        <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder='Type Searching' className=' outline-none p-2 h-full  text-gray-800' />
-                        <button className='bg-blue-500 px-2 text-white rounded-tr rounded-br'>Search</button>
+                        <input onChange={(e) => setSearch(e.target.value)} type="text" placeholder='Type Searching' className=' outline-none p-2 h-full dark:bg-slate-800 dark:text-white  text-gray-800' />
+                        <button className='bg-blue-500 px-2 text-white rounded-tr dark:bg-white dark:text-gray-900 rounded-br'>Search</button>
                     </div>
                 </div>
                 <table className='w-full'>
@@ -105,7 +105,7 @@ const AllocatedBooks = () => {
                     </thead>
                     <tbody>
                     {LoanedBooks.map((book, index) => (
-    <tr className='hover:bg-gray-50 ease-linear duration-200 px-1' key={book?.id}>
+    <tr className='hover:bg-gray-50 dark:hover:bg-slate-800 ease-linear duration-200 px-1' key={book?.id}>
         <td className='py-1 border px-1 text-sm'>{book.id}</td>
         <td className='py-1 border px-1 text-sm'>{book.student_data.name}</td>
         <td className='py-1 border px-1 text-sm'>{book.student_data.cnic}</td>
@@ -135,7 +135,7 @@ const AllocatedBooks = () => {
                     </div>
                     <div className='flex items-center gap-2'>
                         <span>Show:</span>
-                        <select name='pageSize' value={pagination.pageSize} onChange={handlePageSizeChange} className='w-[50px] border outline-blue-500'>
+                        <select name='pageSize' value={pagination.pageSize} onChange={handlePageSizeChange} className='w-[50px] border dark:bg-slate-800 outline-blue-500'>
                             <option value='10'>10</option>
                             <option value='20'>20</option>
                             <option value='40'>40</option>
