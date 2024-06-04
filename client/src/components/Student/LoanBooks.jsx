@@ -69,8 +69,8 @@ const LoanBooks = () => {
             <div className="flex justify-end px-4 py-4">
                 <input type="text" placeholder='search' onChange={(e) => setSearch(e.target.value)} className='p-2 dark:outline-none dark:border-white dark:text-gray-900 dark:bg-slate-700 border rounded outline-blue-500 my-2' />
             </div>
-            <div className='pb-5'>
-                <table className='w-full dark:text-white'>
+            <div className='pb-5 overflow-x-auto'>
+                <table className='min-w-full dark:text-white'>
                     <thead>
                         <tr>
                             <th>Sr.No</th>

@@ -77,7 +77,8 @@ const ManageStudent = () => {
                             <button className='bg-blue-500 px-2 dark:bg-white dark:text-gray-900 text-white rounded-tr rounded-br'>Search</button>
                         </div>
                     </div>
-                    <table className='w-full'>
+                    <div className="overflow-x-auto">
+                    <table className='min-w-full divide-y divide-gray-200'>
                         <thead className='border-b'>
                             <tr>
                                 <td className='pb-3 px-3 font-[500]'>Sr.No</td>
@@ -112,6 +113,7 @@ const ManageStudent = () => {
                             ))}
                         </tbody>
                     </table>
+                    </div>
                     <div className='flex items-center justify-between pt-3 gap-2'>
                         <div>
                             <span>Total Count: {totalCount}</span>

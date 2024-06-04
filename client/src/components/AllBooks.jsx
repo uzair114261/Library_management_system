@@ -91,23 +91,23 @@ const AllBooks = () => {
     const AddBookToCart = (bookData) => {
         const existingBook = JSON.parse(localStorage.getItem("bookList")) || [];
         const existingBookInLocalState = bookList.find(book => book.id === bookData.id);
-      if(existingBook.length >= 3){
-        notifyError('You cannot allocate more than 3 books to a student.')
-        setShowPopUp(false)
-      }else{
-        if (existingBookInLocalState) {
-            notifyError('Book already in the cart');
+        if (existingBook.length >= 3) {
+            notifyError('You cannot allocate more than 3 books to a student.')
+            setShowPopUp(false)
+        } else {
+            if (existingBookInLocalState) {
+                notifyError('Book already in the cart');
+                setShowPopUp(false);
+                return;
+            }
+            const updatedBookList = [...existingBook, bookData];
+            setBookList(updatedBookList);
+            localStorage.setItem("bookList", JSON.stringify(updatedBookList));
+            notifySuccess('Book is ready to Allocate');
             setShowPopUp(false);
-            return;
-          }
-          const updatedBookList = [...existingBook, bookData];
-          setBookList(updatedBookList);
-          localStorage.setItem("bookList", JSON.stringify(updatedBookList));
-          notifySuccess('Book is ready to Allocate');
-          setShowPopUp(false);
-      }
-        
-      };
+        }
+
+    };
     return (
         <div className='p-5'>
             <div className={`p-5 min-w-[300px] bg-white dark:bg-slate-700 dark:text-white max-w-full ease-linear duration-200 mx-auto rounded-lg shadow-`}>
@@ -117,32 +117,35 @@ const AllBooks = () => {
                         <button className='bg-blue-500 px-2 text-white dark:text-gray-900 dark:bg-white rounded-tr rounded-br'>Search</button>
                     </div>
                 </div>
-                <table className='w-full'>
-                    <thead className='border-b'>
-                        <tr>
-                            <td className='pb-3 px-3 font-[500]'>Sr.No</td>
-                            <td className='pb-3 px-3 font-[500]'>Title</td>
-                            <td className='pb-3 px-3 font-[500]'>Author</td>
-                            <td className='pb-3 px-3 font-[500]'>Category</td>
-                            <td className='pb-3 px-3 font-[500]'>Status</td>
-                            <td className='pb-3 px-3 font-[500]'>Details</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {books.map((book, index) => (
-                            <tr className='hover:bg-gray-50 dark:hover:bg-slate-800 ease-linear duration-200 px-2' key={book.id}>
-                                <td className='py-1 border px-3'>{book.id}</td>
-                                <td className='py-1 border px-3'>{book.title}</td>
-                                <td className='py-1 border px-3'>{book.author}</td>
-                                <td className='py-1 border px-3'>{book.category}</td>
-                                <td className='py-1 border px-3'>{`${book.status.charAt(0).toUpperCase()}${book.status.slice(1).toLowerCase()}`}</td>
-                                <td className='py-1 border px-3'>
-                                    <button onClick={() => detailHandler(book)} className='bg-blue-500 dark:bg-white dark:text-gray-900 px-2 py-1 text-sm rounded text-white'>Details</button>
-                                </td>
+                <div className="overflow-x-auto">
+                    <table className='min-w-full'>
+                        <thead className='border-b'>
+                            <tr>
+                                <td className='pb-3 px-3 font-[500]'>Sr.No</td>
+                                <td className='pb-3 px-3 font-[500]'>Title</td>
+                                <td className='pb-3 px-3 font-[500]'>Author</td>
+                                <td className='pb-3 px-3 font-[500]'>Category</td>
+                                <td className='pb-3 px-3 font-[500]'>Status</td>
+                                <td className='pb-3 px-3 font-[500]'>Details</td>
                             </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            {books.map((book, index) => (
+                                <tr className='hover:bg-gray-50 dark:hover:bg-slate-800 ease-linear duration-200 px-2' key={book.id}>
+                                    <td className='py-1 border px-3'>{book.id}</td>
+                                    <td className='py-1 border px-3'>{book.title}</td>
+                                    <td className='py-1 border px-3'>{book.author}</td>
+                                    <td className='py-1 border px-3'>{book.category}</td>
+                                    <td className='py-1 border px-3'>{`${book.status.charAt(0).toUpperCase()}${book.status.slice(1).toLowerCase()}`}</td>
+                                    <td className='py-1 border px-3'>
+                                        <button onClick={() => detailHandler(book)} className='bg-blue-500 dark:bg-white dark:text-gray-900 px-2 py-1 text-sm rounded text-white'>Details</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+
                 <div className='flex items-center justify-between pt-3 gap-2'>
                     <div>
                         <span>Total Count: {totalCount}</span>
