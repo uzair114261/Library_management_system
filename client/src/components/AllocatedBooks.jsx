@@ -123,7 +123,7 @@ const AllocatedBooks = () => {
                                     </td>
                                     <td className='py-1 border px-1 text-sm'>
                                         <button disabled={book.status === 'RETURNED'} onClick={() => handleReturnBook(book.id)} className={`${book.status === "BORROWED" ? 'bg-blue-500' : 'bg-green-500'} px-2 py-1 w-full flex items-center justify-center mx-auto text-sm rounded text-white`}>
-                                            {book.status === 'BORROWED' ? 'Received' : <CheckLg />}
+                                            {book.status === 'BORROWED' ? 'Receive' : <CheckLg />}
                                         </button>
                                     </td>
                                 </tr>

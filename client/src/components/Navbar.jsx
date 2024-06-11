@@ -12,7 +12,8 @@ const Navbar = () => {
     const [logoutConfirm, setLogoutConfirm] = useState(false);
     const [dropdown, setDropdown] = useState(false);
     const dropdownRef = useRef(null);
-    const { image } = JSON.parse(localStorage.getItem("user"));
+    const user = localStorage.getItem("user")
+    const { image } = user ? JSON.parse(user) : {}
     const navigate = useNavigate();
 
     const logoutHandler = () => {

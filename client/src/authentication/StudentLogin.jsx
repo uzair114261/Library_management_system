@@ -60,7 +60,7 @@ const StudentLogin = () => {
 
                     <div className='mb-2'>
                         <label htmlFor="cnic">CNIC</label>
-                        <ReactInputMask mask={`99999-9999999-9`} maskChar={`_`} tabIndex={1} {...register('cnic')} type="text" className='w-full outline-blue-500 p-2 text-gray-700 border-[1px] rounded my-1' />
+                        <ReactInputMask mask={`99999-9999999-9`} maskChar={`_`}  {...register('cnic')} type="text" className='w-full outline-blue-500 p-2 text-gray-700 border-[1px] rounded my-1' />
                     </div>
                     <div className='pb-3'>
                         <label htmlFor="password">Password</label>

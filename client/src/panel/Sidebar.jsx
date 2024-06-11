@@ -34,7 +34,7 @@ const Sidebar = () => {
                                 }`
                             }
                         >
-                            <div className="   w-[50px] mx-auto flex justify-end">
+                            <div className="w-[50px] mx-auto flex justify-end">
                                 <BarChartFill className={({ isActive }) => (isActive ? 'text-black' : 'text-white')} />
                             </div>
                             <div className="w-[80%]">

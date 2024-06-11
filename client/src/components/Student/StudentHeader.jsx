@@ -10,7 +10,8 @@ function StudentHeader() {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdown, setDropdown] = useState(false);
   const dropdownRef = useRef(null);
-  const { image } = JSON.parse(localStorage.getItem("studentData"));
+  const studentData = localStorage.getItem('studentData')
+  const {image} = studentData ? JSON.parse(studentData) : {}
 
   const logoutHandler = () => {
     localStorage.removeItem("studentData");

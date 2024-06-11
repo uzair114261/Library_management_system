@@ -4,7 +4,8 @@ import moment from 'moment'
 const LoanBooks = () => {
     const [loans, setLoans] = useState([])
     const [loading, setLoading] = useState(false)
-    const { cnic } = JSON.parse(localStorage.getItem('studentData'))
+    const studentData = localStorage.getItem('studentData')
+    const {cnic} = studentData ? JSON.parse(studentData) : {}
     const [search, setSearch] = useState('')
     const fetchAllLoans = async () => {
         try {
@@ -78,6 +79,8 @@ const LoanBooks = () => {
                             <th>Author Name</th>
                             <th>Issue Date</th>
                             <th>Due Date</th>
+                            <th>Return Date</th>
+                            <th>Fine</th>
                             <th>Status</th>
                         </tr>
                     </thead>
@@ -92,6 +95,8 @@ const LoanBooks = () => {
                                             <td className='px-2 text-sm py-2 border'>{loan.book_data.author}</td>
                                             <td className='px-2 text-sm py-2 border'>{moment(loan.loan_date).format('ddd, DD-MM-YYYY')}</td>
                                             <td className='px-2 text-sm py-2 border'>{moment(loan.due_date).format('ddd, DD-MM-YYYY')}</td>
+                                            <td className='px-2 text-sm py-2 border'>{loan.return_date && moment(loan.return_date).format('ddd, DD-MM-YYYY')}</td>
+                                            <td className='px-2 text-sm py-2 border'>{loan.fine}</td>
                                             <td className='px-2 text-sm py-2 border'>{loan.status.charAt(0).toUpperCase() + loan.status.slice(1).toLowerCase()}</td>
                                         </tr>
                                     ))}

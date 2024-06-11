@@ -26,6 +26,7 @@ import StudentPanel from "./components/Student/StudentPanel";
 import UpdateProfile from "./components/Student/UpdateProfile";
 import AvailalbeBooks from "./components/Student/AvailalbeBooks";
 import LoanBooks from "./components/Student/LoanBooks";
+import Error404 from "./components/Error404";
 
 const AppContent = () => {
   const location = useLocation();
@@ -42,11 +43,8 @@ const AppContent = () => {
             <Route path="" element={<LoanBooks />} />
             <Route path="update_profile" element={<UpdateProfile />} />
             <Route path="books_available" element={<AvailalbeBooks />} />
-
+            <Route path="*" element={<Error404 />} /> {/* Catch-all route for student_panel */}
           </Route>
-        </Routes>
-        <Routes>
-
           <Route path="/admin_login" element={<Login />} />
           <Route path="/dashboard/*" element={<Content />}>
             <Route path="analytics" element={<Analytics />} />
@@ -57,7 +55,9 @@ const AppContent = () => {
             <Route path="allocated_books" element={<AllocatedBooks />} />
             <Route path="manage_students" element={<ManageStudent />} />
             <Route path="student_info/:cnic" element={<StudentDetail />} />
+            <Route path="*" element={<Error404 />} /> {/* Catch-all route for dashboard */}
           </Route>
+          <Route path="*" element={<Error404 />} /> {/* Global catch-all route */}
         </Routes>
       </div>
     </div>

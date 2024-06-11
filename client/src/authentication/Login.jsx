@@ -36,7 +36,7 @@ const Login = () => {
                 localStorage.setItem('access', access)
                 localStorage.setItem('user', JSON.stringify(user));
                 notifySuccess('Logged in Successfully') 
-                navigate('/dashboard/')
+                navigate('/dashboard/analytics')
             }else{
                 notifyError(responseData.error)
             }

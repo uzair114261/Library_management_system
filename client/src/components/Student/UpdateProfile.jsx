@@ -57,7 +57,7 @@ const UpdateProfile = () => {
             </div>
             <div className='p-1'>
               <label htmlFor="cnic">CNIC</label>
-              <input {...register('cnic')} type="text" id='cnic' className='input-field' value={studentData.cnic} readOnly />
+              <input {...register('cnic')} type="text" id='cnic' className='input-field' value={studentData?.cnic} readOnly />
             </div>
           </div>
           <div className='grid md:grid-cols-2 gap-2'>
