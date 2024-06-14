@@ -19,6 +19,7 @@ class CustomPagination(PageNumberPagination):
 def create_user(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
+        # Hashing of Password
         password = make_password(serializer.validated_data['password'])
         serializer.validated_data['password'] = password
         serializer.save()
@@ -95,7 +96,6 @@ class AdminLoginView(APIView):
             'access': str(access_token),
             'user': user_data
         }
-
         return Response(data, status=status.HTTP_200_OK)
     
     
