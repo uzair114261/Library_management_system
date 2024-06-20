@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight, PencilFill, Trash2Fill, Trash3Fill, X } from 'react-bootstrap-icons';
 import { BookContext } from '../context/BookCart';
 import { useToast } from '../context/ToastContext';
+import { AnimatePresence, motion } from 'framer-motion';
 
 const AllBooks = () => {
     const { bookList, setBookList } = useContext(BookContext)
@@ -165,6 +166,9 @@ const AllBooks = () => {
                     </div>
                 </div>
             </div>
+                <AnimatePresence>
+
+                </AnimatePresence>
             {
                 showPopup && (
                     <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 ease-linear duration-200">
